@@ -24,6 +24,12 @@ function Register_Login() {
     app.get('/Sign_up', async(req, res) => res.render("Register_Login/Sign_up"))
 
 
+    app.get('/Pawn_Shop', async(req, res) => {
+        const respones = await axios.get(base_url + '/Customers')
+        res.render("Shop_Index", { Customers: respones.data, Name: Name_Customer })
+    })
+
+
     app.post('/Confrim_Register', async(req, res) => {
         try {
 
@@ -90,13 +96,6 @@ function Register_Login() {
     })
 }
 
-
-app.get('/Pawn_Shop', async(req, res) => {
-    const respones = await axios.get(base_url + '/Customers')
-    res.render("Shop_Index", { Customers: respones.data, Name: Name_Customer })
-})
-
-
 function Pawn_Product() {
     app.get('/Pawn_Product/:Name/:Id', async(req, res) => {
         Id_Customer = req.params.Id
@@ -112,7 +111,10 @@ function Pawn_Product() {
             Employee_Id: req.body.Employee_Id,
             Name: req.body.Name,
             Value: req.body.Value,
+            Status: req.body.Status
+
         }
+        data_Product.Status = 'False'
         await axios.post(base_url + '/Item_Post', data_Product)
         const respones_Item = await axios.get(base_url + '/Items')
         const respones_Employee = await axios.get(base_url + '/Employees')
@@ -237,8 +239,12 @@ function Employee() {
 function Item() {
     app.get('/Item_Page', async(req, res) => {
 
-        const respones = await axios.get(base_url + '/Items')
-        res.render("Item/Item", { Items: respones.data })
+        const respones_Items = await axios.get(base_url + '/Items')
+        const respones_Customers = await axios.get(base_url + '/Customers')
+        res.render("Item/Item", {
+            Items: respones_Items.data,
+            Customers: respones_Customers.data
+        })
     })
 
     app.get('/Update_Item/:Product_Id', async(req, res) => {
@@ -302,8 +308,17 @@ function Item() {
 function Ticket() {
 
     app.get('/Ticket', async(req, res) => {
-        const respones = await axios.get(base_url + '/Tickets')
-        res.render("Ticket/Ticket", { Tickets: respones.data })
+        const respones_Ticket = await axios.get(base_url + '/Tickets')
+        const respones_Customer = await axios.get(base_url + '/Customers')
+        const respones_Item = await axios.get(base_url + '/Items')
+        const respones_Employee = await axios.get(base_url + '/Employees')
+        res.render("Ticket/Ticket", {
+            Tickets: respones_Ticket.data,
+            Customers: respones_Customer.data,
+            Items: respones_Item.data,
+            Employees: respones_Employee.data,
+
+        })
     })
 
     app.get('/Delete_Ticket/:Ticket_Id', async(req, res) => {
@@ -314,11 +329,42 @@ function Ticket() {
 
 }
 
+function admin() {
+    app.get('/admin', async(req, res) => {
+        res.render('admin')
+    })
+
+
+    app.get('/Check_Pawn', async(req, res) => {
+        const respones_items = await axios.get(base_url + '/Items')
+        const respones_Customers = await axios.get(base_url + '/Customers')
+        res.render("Check_Pawn", {
+            Items: respones_items.data,
+            Customers: respones_Customers.data
+        })
+    })
+
+    app.get('/Confirm/:Product_Id', async(req, res) => {
+
+        const data = {
+
+            Status: req.body.Status
+        }
+        data.Status = 'True'
+
+        axios.put(base_url + '/Item_Update/' + req.params.Product_Id, data)
+
+        res.redirect('/Check_Pawn')
+    })
+
+}
+
 Register_Login()
 Pawn_Product()
 Customer()
 Employee()
 Item()
 Ticket()
+admin()
 
 app.listen(5500, () => console.log(`Listening on port 5500`))
