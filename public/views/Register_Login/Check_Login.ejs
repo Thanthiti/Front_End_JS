@@ -7,11 +7,17 @@
     <title>Login Page</title>
     <link rel="stylesheet" href="../css/checkLog.css">
 </head>
+<div class="background-image">
+    <img src="images/kanistra-studio-19-pawnshop.jpg" alt="Pawnshop">
+</div>
+
+
+
 
 <body>
     <div class="container">
         <div class="content">
-            <h1>Welcome to Check Login</h1>
+            <h1>กดยืนยันเพื่อเข้าสู่ระบบ</h1>
             <% var count_Name = 0 %>
                 <% var count_Password = 0 %>
                     <% var index = 0 %>
@@ -27,7 +33,7 @@
                                                     <% if (count_Password != Customers.length ){ %>
                                                         <a href="/Pawn_Shop">ยืนยันเข้าสู่ระบบ คุณ <%=Customers[index].Name %></a>
                                                         <%} else{ %>
-                                                            <div class="error-message">รหัสผ่านไม่ถูกต้อง</div>
+                                                            <div class="error-message">รหัสผ่านของคุณไม่ถูกต้อง</div><br>
                                                             <h1><a href="/Sign_in">กลับ</a></h1>
                                                             <%}%>
                                                                 <%} else{ %>
