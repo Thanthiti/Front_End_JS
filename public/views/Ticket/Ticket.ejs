@@ -16,7 +16,7 @@
                 <th>Ticket_Id</th>
                 <th>Customer_Id</th>
                 <th>Product_Id</th>
-                <th>Employee_Id</th>
+                <th>ชื่อพนักงาน</th>
                 <th>Principle</th>
                 <th>Rate</th>
                 <th>Total</th>
@@ -41,7 +41,7 @@
                                             <% }%>
                     </td>
                     <td>
-                        <% for(let n = 0; n < Tickets.length;n++) {%>
+                        <% for(let n = 0; n < Items.length;n++) {%>
                             <%if(Tickets[i].Product_Id == Items[n].Product_Id) {  %>
                                 <%=Items[n].Name%>
                                     <%break%>
@@ -50,8 +50,10 @@
 
                     </td>
                     <td>
-                        <% for(let n = 0; n < Tickets.length;n++) {%>
+                        <% for(let n = 0; n < Employees.length;n++) {%>
+
                             <%if(Tickets[i].Employee_Id == Employees[n].Employee_Id) {  %>
+
                                 <%=Employees[n].Name%>
                                     <%break%>
                                         <% }%>
