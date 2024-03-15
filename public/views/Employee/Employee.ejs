@@ -17,22 +17,32 @@
                 <th>ชื่อ</th>
                 <th>เบอร์โทรศัพท์</th>
                 <th>เงินเดือน</th>
-                <th>Post</th>
+                <th>ตำแหน่ง</th>
                 <th>Actions</th>
             </tr>
             <% for(let i = 0 ;i < Employees.length ;i++){%>
-            <tr>
-                <td><%=Employees[i].Employee_Id%></td>
-                <td><%=Employees[i].Name%></td>
-                <td><%=Employees[i].Phone%></td>
-                <td><%=Employees[i].Salary%></td>
-                <td><%=Employees[i].Post%></td>
-                <td>
-                    <a href="/Update_Employee/<%= Employees[i].Employee_Id %>" class="button">Update</a>
-                    <a href="/Delete_Employee/<%= Employees[i].Employee_Id %>" class="button">Delete</a>
-                </td>
-            </tr>
-            <%}%>
+                <tr>
+                    <td>
+                        <%=Employees[i].Employee_Id%>
+                    </td>
+                    <td>
+                        <%=Employees[i].Name%>
+                    </td>
+                    <td>
+                        <%=Employees[i].Phone%>
+                    </td>
+                    <td>
+                        <%=Employees[i].Salary%>
+                    </td>
+                    <td>
+                        <%=Employees[i].Post%>
+                    </td>
+                    <td>
+                        <a href="/Update_Employee/<%= Employees[i].Employee_Id %>" class="button">Update</a>
+                        <a href="/Delete_Employee/<%= Employees[i].Employee_Id %>" class="button">Delete</a>
+                    </td>
+                </tr>
+                <%}%>
         </table>
         <br><a href="/Create_Employee" class="button">เพิ่มพนักงาน</a>
         <a href="/admin" class="button">กลับไปหน้าแรก</a>
