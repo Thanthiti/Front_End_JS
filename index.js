@@ -7,7 +7,7 @@ const { Console } = require('console')
 const { name } = require('ejs')
 
 //var base_url = "http://localhost:3000"
-var base_url = "http://node60102-projecjs.proen.app.ruk-com.cloud:11969"
+var base_url = "http://node60102-projecjs.proen.app.ruk-com.cloud"
 app.set("views", path.join(__dirname, "/public/views"))
 app.set('view engine', 'ejs')
 app.use(bodyParser.json())
